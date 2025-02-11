@@ -160,6 +160,9 @@ h1{
     font-size:36px
 }
 
+.no-underline {
+    text-decoration: none;
+}
 .product-box img {
     width: 150px;
 }
@@ -217,3 +220,28 @@ h1{
     transform: scale(1.05) !important;  
 }
 
+.custom-back-link {
+    color: #6F4E37 !important;
+    border-color: #6F4E37 !important;
+}
+
+.custom-back-link:hover {
+    background-color: #6F4E37 !important;
+    color: white !important;
+}
+
+.product-image {
+    min-height: 546px; 
+    max-height: 80vh;
+    width: auto; 
+    object-fit: contain; 
+    display: block; 
+    margin: 0 auto; 
+}
+
+@media (max-width: 768px) { 
+    .product-image {
+        min-height: 300px; 
+        max-height: 60vh; 
+    }
+}

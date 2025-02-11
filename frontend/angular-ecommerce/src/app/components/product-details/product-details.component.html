@@ -1,0 +1,23 @@
+<div class="container mt-2" *ngIf="product">
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <img src="{{ product.imageUrl }}" class="img-fluid rounded shadow-lg product-image" alt="{{ product.name }}">
+        </div>
+        <div class="col-md-6">
+            <h2 class="mb-3 text-uppercase fw-bold product-name">{{ product.name }}</h2>
+            <h4 class="mb-4 price">{{ product.price | currency:'PLN' }}</h4>
+
+            <p class="lead">{{ product.description }}</p>
+
+            <button class="btn btn-lg btn-success add-to-cart-btn mt-3">
+                <i class="fa-solid fa-cart-shopping me-2"></i>Dodaj do koszyka
+            </button>
+
+            <div class="mt-4">
+                <a routerLink="/products" class="btn btn-outline-secondary custom-back-link">
+                    <i class="fa-solid fa-arrow-left me-2"></i>Powrót do listy produktów
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
