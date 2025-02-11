@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="section-content section-content-p30">
-        <div class="container-fluid">
-            <div class="row">
+        <div class="container-fluid product-container">
+            <div class="row product-list">
                 <div *ngFor="let tempProduct of products" class="col-md-3">
                     <div class="product-box">
                         <a routerLink="/products/{{ tempProduct.id}}" class="no-underline">
@@ -14,6 +14,33 @@
                         <button class="btn add-to-cart-btn btn-sm">
                             <i class="fa-solid fa-cart-shopping me-3"></i>Dodaj do koszyka
                         </button>
+                    </div>
+                </div>
+                <div *ngIf="products?.length == 0" class="no-products-message">
+                    <i class="fa-solid fa-frown me-2"></i>
+                    <span>Nie znaleziono produktów</span>
+                </div>
+            </div>
+            <div class="footer-pagination">
+                <div class="row w-100 align-items-center">
+                    <div class="col d-flex justify-content-center">
+                        <ngb-pagination [(page)]="thePageNumber"
+                                        [pageSize]="thePageSize"
+                                        [collectionSize]="theTotalElements"
+                                        [maxSize]="5"
+                                        [boundaryLinks]="true"
+                                        (pageChange)="listProducts()">
+                        </ngb-pagination>
+                    </div>
+                    <div class="col-auto text-end product-page-select-container">
+                        <span class="mr-2">Liczba produktów na stronie</span>
+                        <select class="form-select form-select-sm product-page-select"
+                                #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                            <option>4</option>
+                            <option selected="true">12</option>
+                            <option>20</option>
+                            <option>40</option>
+                        </select>
                     </div>
                 </div>
             </div>
