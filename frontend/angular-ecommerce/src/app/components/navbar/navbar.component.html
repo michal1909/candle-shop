@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a class="logo navbar-brand d-flex align-items-center" href="#">
+            <img src="assets/images/logo.png" alt="Logo" style="width: 40px; height: 40px; margin-right: 8px;">
+            <span>EMBER</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation" style="margin-left: auto;">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex align-items-center me-auto">
+                <form class="d-flex search-form mb-3 mb-lg-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Czego szukasz?" aria-label="search"
+                            aria-describedby="button-search">
+                        <button class="btn btn-outline-secondary" type="button" id="button-search"><i
+                                class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </form>
+                <div class="ms-4">
+                    <div class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Kategorie
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="categoryList">
+                        <li *ngFor="let category of categories">
+                          <a routerLink="/categories/{{ category.id }}" routerLinkActive="active-link" class="dropdown-item">{{ category.categoryName }}</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+            </div>
+            <div class="navbar-nav">
+                <a href="" class="cart"><i class="fa-solid fa-cart-shopping me-3"></i></a>
+                <button type="button" class="btn login-btn mr-3">Zaloguj się</button>
+            </div>
+        </div>
+    </div>
+</nav>
