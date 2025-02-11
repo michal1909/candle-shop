@@ -11,7 +11,7 @@
                             <h1 class="product-name">{{ tempProduct.name }}</h1>
                         </a>
                         <div class="price mb-1">{{ tempProduct.price | currency:'PLN'}}</div>
-                        <button class="btn add-to-cart-btn btn-sm">
+                        <button (click)="addToCart(tempProduct)" class="btn add-to-cart-btn btn-sm">
                             <i class="fa-solid fa-cart-shopping me-3"></i>Dodaj do koszyka
                         </button>
                     </div>

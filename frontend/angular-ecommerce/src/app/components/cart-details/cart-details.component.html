@@ -1,0 +1,50 @@
+<div class="container mt-4">
+    <h2 class="mb-4"><i class="fa-solid fa-cart-shopping me-3"></i>Twój koszyk</h2>
+
+    <div *ngIf="cartItems.length > 0">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Produkt</th>
+                    <th>Nazwa</th>
+                    <th>Ilość</th>
+                    <th>Cena</th>
+                    <th>Usuń</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tempCartItem of cartItems">
+                    <td>
+                        <img [src]="tempCartItem.imageUrl" class="img-thumbnail" width="100px">
+                    </td>
+                    <td>
+                        <p class="fw-bold">{{ tempCartItem.name }}</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <button (click)="decrementQuantity(tempCartItem)" class="btn btn-outline-danger btn-sm me-2">−</button>
+                            <span class="fw-bold">{{ tempCartItem.quantity }}</span>
+                            <button (click)="incrementQuantity(tempCartItem)" class="btn btn-outline-success btn-sm ms-2">+</button>
+                        </div>
+                    </td>
+                    <td>{{ tempCartItem.quantity * tempCartItem.price | currency: 'PLN' }}</td>
+                    <td>
+                        <button (click)="remove(tempCartItem)" class="btn btn-outline-danger btn-sm">❌</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-end">
+            <h4><strong>🛍️ Razem: {{ totalPrice | currency: 'PLN' }}</strong></h4>
+            <h5>Liczba produktów: {{ totalQuantity }}</h5>
+            <button (click)="clearCart()" class="btn btn-warning">🗑️ Opróżnij koszyk</button>
+            <a routerLink="/checkout" class="btn btn-primary ms-2"><i class="fa-solid fa-arrow-right"></i> Dalej</a>
+        </div>
+    </div>
+
+    <div *ngIf="cartItems.length == 0" class="alert alert-warning text-center">
+        <h4>Twój koszyk jest pusty 🛒</h4>
+        <a routerLink="/products" class="btn btn-primary mt-2">🛍️ Powrót do sklepu</a>
+    </div>
+</div>

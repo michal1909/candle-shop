@@ -26,14 +26,14 @@
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="categoryList">
                         <li *ngFor="let category of categories">
-                          <a routerLink="/categories/{{ category.id }}" routerLinkActive="active-link" class="dropdown-item">{{ category.categoryName }}</a>
+                          <a routerLink="/categories/{{ category.id }}" routerLinkActive="active" class="dropdown-item">{{ category.categoryName }}</a>
                         </li>
                       </ul>
                     </div>
                   </div>
             </div>
             <div class="navbar-nav">
-                <a href="" class="cart"><i class="fa-solid fa-cart-shopping me-3"></i></a>
+                <a routerLink="/cart-details" class="cart"><i class="fa-solid fa-cart-shopping me-3"></i></a>
                 <button type="button" class="btn login-btn mr-3">Zaloguj się</button>
             </div>
         </div>

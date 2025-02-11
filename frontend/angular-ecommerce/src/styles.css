@@ -94,6 +94,16 @@ main {
     min-width: 200px; 
 }
 
+#categoryList .dropdown-item.active {
+    background-color: #6F4E37 !important; 
+    color: #FED8B1 !important; 
+}
+
+#categoryList .dropdown-item.active:hover {
+    background-color: #6F4E37 !important;  
+    color: #FED8B1 !important; 
+}
+
 
 .navbar-nav .login-btn {
     background-color: #FED8B1;
@@ -294,8 +304,8 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f8d7da; /* Ciemniejszy różowy tło */
-    color: #721c24; /* Ciemny kolor tekstu */
+    background-color: #f8d7da; 
+    color: #721c24;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 18px;
@@ -304,9 +314,47 @@ h1{
 }
 
 .no-products-message i {
-    font-size: 24px; /* Ikonka w odpowiednim rozmiarze */
+    font-size: 24px; 
 }
 
 .no-products-message span {
     font-weight: 600;
+}
+
+/* Cart details */
+/* Przycisk Opróżnij koszyk */
+.btn-warning {
+    background-color: #9e5300; /* Ciemny pomarańczowy */
+    color: white; /* Kolor tekstu */
+    border-radius: 4px; /* Zaokrąglone rogi, ale subtelniejsze */
+    padding: 10px 20px;
+    font-weight: bold;
+    border: 1px solid #9e5300; /* Obramowanie w tym samym kolorze */
+    font-size: 16px; /* Zwiększenie rozmiaru czcionki */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efekt hover dla przycisku Opróżnij koszyk */
+.btn-warning:hover {
+    background-color: #6F4E37; /* Brązowy kolor */
+    transform: scale(1.05); /* Powiększenie przycisku */
+}
+
+/* Przycisk Dalej */
+.btn-primary {
+    background-color: #FED8B1; /* Jasny, elegancki żółty */
+    color: #6F4E37; /* Ciemny brązowy tekst */
+    border-radius: 4px; /* Subtelne zaokrąglenie */
+    padding: 10px 20px;
+    font-weight: bold;
+    border: 1px solid #FED8B1; /* Obramowanie w tym samym kolorze */
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efekt hover dla przycisku Dalej */
+.btn-primary:hover {
+    background-color: #6F4E37; /* Brązowy kolor */
+    color: white; /* Biały tekst po najechaniu */
+    transform: scale(1.05); /* Powiększenie przycisku */
 }
