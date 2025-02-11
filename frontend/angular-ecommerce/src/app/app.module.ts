@@ -10,6 +10,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
+  {path: 'search/:keyword', component: ProductListComponent},
   {path: 'categories/:id', component: ProductListComponent},
   {path: 'categories', component: ProductListComponent},
   {path: 'products', component: ProductListComponent},

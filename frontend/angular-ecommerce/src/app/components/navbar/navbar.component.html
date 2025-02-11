@@ -13,9 +13,9 @@
             <div class="d-flex align-items-center me-auto">
                 <form class="d-flex search-form mb-3 mb-lg-0">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Czego szukasz?" aria-label="search"
-                            aria-describedby="button-search">
-                        <button class="btn btn-outline-secondary" type="button" id="button-search"><i
+                        <input #myInput type="text" class="form-control" placeholder="Czego szukasz?" aria-label="search"
+                            aria-describedby="button-search" (input)="doSearch(myInput.value)">
+                        <button (click)="doSearch(myInput.value)" class="btn btn-outline-secondary" id="button-search"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </form>
