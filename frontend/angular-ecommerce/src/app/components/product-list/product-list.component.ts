@@ -14,7 +14,7 @@ import { CartService } from '../../services/cart.service';
 export class ProductListComponent {
 
   products: Product[] = [];
-  currentCategoryId: number = -1;  
+  currentCategoryId: number = -1;
   previousCategoryId: number = -1;
   searchMode: boolean = false;
 
@@ -48,7 +48,7 @@ export class ProductListComponent {
     }
     this.previousCategoryId = -1;
 
-  
+
     this.productService.searchProductsPaginate(this.thePageNumber - 1, this.thePageSize, theKeyword).subscribe(
       data => {
         this.products = data._embedded.products;
@@ -62,14 +62,14 @@ export class ProductListComponent {
   handleListProducts() {
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
 
-    
+
     if (hasCategoryId) {
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
     } else {
-      this.currentCategoryId = -1; 
+      this.currentCategoryId = -1;
     }
 
-  
+
     if (this.previousCategoryId != this.currentCategoryId) {
       this.thePageNumber = 1;
     }

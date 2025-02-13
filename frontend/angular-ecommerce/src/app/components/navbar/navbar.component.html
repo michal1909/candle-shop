@@ -33,9 +33,11 @@
                   </div>
             </div>
             <div class="navbar-nav">
-                <a routerLink="/cart-details" class="cart"><i class="fa-solid fa-cart-shopping me-3"></i></a>
-                <button type="button" class="btn login-btn mr-3">Zaloguj się</button>
-            </div>
+              <a routerLink="/cart-details" class="cart"><i class="fa-solid fa-cart-shopping me-3"></i></a>
+              <a *ngIf="!isLoggedIn" routerLink="/login" class="btn login-btn mr-3">Zaloguj się</a>
+              <a *ngIf="isLoggedIn" (click)="logout()" class="btn login-btn mr-3">Wyloguj się</a>
+              <span *ngIf="isLoggedIn" class="nav-link me-3">Witaj, {{ userName }}!</span>
+          </div>
         </div>
     </div>
 </nav>
