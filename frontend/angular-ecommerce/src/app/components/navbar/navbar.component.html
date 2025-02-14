@@ -1,43 +1,57 @@
 <nav class="navbar navbar-expand-lg navbar-light mb-3">
-    <div class="container-fluid">
-        <a class="logo navbar-brand d-flex align-items-center" href="#">
-            <img src="assets/images/logo.png" alt="Logo" style="width: 40px; height: 40px; margin-right: 8px;">
-            <span>EMBER</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation" style="margin-left: auto;">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="d-flex align-items-center me-auto">
-                <form class="d-flex search-form mb-3 mb-lg-0">
-                    <div class="input-group">
-                        <input #myInput type="text" class="form-control" placeholder="Czego szukasz?" aria-label="search"
-                            aria-describedby="button-search" (input)="doSearch(myInput.value)">
-                        <button (click)="doSearch(myInput.value)" class="btn btn-outline-secondary" id="button-search"><i
-                                class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
-                </form>
-                <div class="ms-4">
-                    <div class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Kategorie
-                      </a>
-                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="categoryList">
-                        <li *ngFor="let category of categories">
-                          <a routerLink="/categories/{{ category.id }}" routerLinkActive="active" class="dropdown-item">{{ category.categoryName }}</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-            </div>
-            <div class="navbar-nav">
-              <a routerLink="/cart-details" class="cart"><i class="fa-solid fa-cart-shopping me-3"></i></a>
-              <a *ngIf="!isLoggedIn" routerLink="/login" class="btn login-btn mr-3">Zaloguj się</a>
-              <a *ngIf="isLoggedIn" (click)="logout()" class="btn login-btn mr-3">Wyloguj się</a>
-              <span *ngIf="isLoggedIn" class="nav-link me-3">Witaj, {{ userName }}!</span>
+  <div class="container-fluid">
+    <a class="logo navbar-brand d-flex align-items-center" href="#">
+      <img src="assets/images/logo.png" alt="Logo" style="width: 40px; height: 40px; margin-right: 8px;">
+      <span>EMBER</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+      style="margin-left: auto;">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="d-flex align-items-center me-auto">
+        <form class="d-flex search-form mb-3 mb-lg-0">
+          <div class="input-group">
+            <input #myInput type="text" class="form-control" placeholder="Czego szukasz?" aria-label="search"
+              aria-describedby="button-search" (input)="doSearch(myInput.value)">
+            <button (click)="doSearch(myInput.value)" class="btn btn-outline-secondary" id="button-search"><i
+                class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+        </form>
+        <div class="ms-4">
+          <div class="nav-item dropdown">
+            <ng-container *ngIf="!isAdmin()">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Kategorie
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="categoryList">
+                <li *ngFor="let category of categories">
+                  <a routerLink="/categories/{{ category.id }}" routerLinkActive="active" class="dropdown-item">
+                    {{ category.categoryName }}
+                  </a>
+                </li>
+              </ul>
+            </ng-container>
+            <ng-container *ngIf="isAdmin()">
+              <div class="admin-links d-flex flex-row gap-3">
+                <a routerLink="/admin/dashboard" routerLinkActive="active" class="nav-link">Panel Główny</a>
+                <a routerLink="/admin/products" routerLinkActive="active" class="nav-link">Zarządzanie produktami</a>
+                <a routerLink="/admin/orders" routerLinkActive="active" class="nav-link">Zamówienia</a>
+                <a routerLink="/admin/users" routerLinkActive="active" class="nav-link">Użytkownicy</a>
+              </div>
+            </ng-container>
+            
           </div>
         </div>
+      </div>
+      <div class="navbar-nav">
+        <a routerLink="/cart-details" class="cart"><i class="fa-solid fa-cart-shopping me-3"></i></a>
+        <span *ngIf="isLoggedIn" class="nav-link me-3">Witaj, {{ userName }}!</span>
+        <a *ngIf="!isLoggedIn" routerLink="/login" class="btn login-btn mr-3">Zaloguj się</a>
+        <a *ngIf="isLoggedIn" (click)="logout()" class="btn login-btn mr-3">Wyloguj się</a>
+      </div>
     </div>
+  </div>
 </nav>

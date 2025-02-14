@@ -62,4 +62,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   doSearch(value: string) {
     this.router.navigateByUrl(`/search/${value}`);
   }
+
+  isAdmin(): boolean {
+    const user = this.authService.getUser();
+    return user && user.role === 'ADMIN';
+  }
 }

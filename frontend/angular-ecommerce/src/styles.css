@@ -1,14 +1,19 @@
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+html, body {
+    height: 100%;
     margin: 0;
+    padding: 0;
 }
 
-main {
-    flex: 1;
-    padding: 20px 0;
-    background-color: #F9F9F9;
+/* Struktura główna aplikacji */
+app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Gwarantuje, że strona zajmuje całą wysokość ekranu */
+}
+
+/* Główna zawartość strony – wypełnia przestrzeń */
+.main-content {
+    flex: 1; /* Wypycha stopkę na dół */
 }
 
 /* Navbar*/

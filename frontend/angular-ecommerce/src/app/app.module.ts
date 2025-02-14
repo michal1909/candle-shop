@@ -16,9 +16,16 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
-import { CheckoutComponent } from './checkout/checkout.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { AdminGuard } from './admin.guard';
+import { AdminProductManagementComponent } from './components/admin-product-management/admin-product-management.component';
+
 
 const routes: Routes = [
+  {path: 'admin/products', component: AdminProductManagementComponent},
+  {path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard]},
   {path: 'cart-details', component: CartDetailsComponent},
   {path: 'products/:id', component: ProductDetailsComponent},
   {path: 'search/:keyword', component: ProductListComponent},
@@ -41,7 +48,10 @@ const routes: Routes = [
     CartDetailsComponent,
     LoginComponent,
     RegisterComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    FooterComponent,
+    AdminPanelComponent,
+    AdminProductManagementComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

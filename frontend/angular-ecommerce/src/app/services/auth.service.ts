@@ -17,11 +17,12 @@ export class AuthService {
 
   setToken(token: string, user: any) {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('token', token);
+      const cleanedToken = token.trim(); // ✅ Remove unwanted spaces/newlines
+      localStorage.setItem('token', cleanedToken);
+      console.log("✅ Stored Token:", JSON.stringify(cleanedToken)); // Debug
+  
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
-        // console.log("AuthService: Token zapisany:", token);
-        // console.log("AuthService: Użytkownik zapisany:", user);
         this.isLoggedInSubject.next(true);
         this.userNameSubject.next(user.name);
       } else {
@@ -35,7 +36,13 @@ export class AuthService {
 
   getToken(): string | null {
     if (isPlatformBrowser(this.platformId)) {
-      return localStorage.getItem('token');
+      let token = localStorage.getItem('token');
+  
+      if (token) {
+        token = token.replace(/\s+/g, ''); // ✅ Remove all newlines and spaces
+        console.log("✅ Cleaned Token:", JSON.stringify(token)); // Debug log
+        return `Bearer ${token}`;
+      }
     }
     return null;
   }
@@ -74,6 +81,11 @@ export class AuthService {
   getUserName(): string | null {
     const user = this.getUser();
     return user ? user.name : null;
+  }
+
+  getUserRole(): string | null {
+    const user = this.getUser();
+    return user ? user.role : null;
   }
 
   checkAuthOnRefresh() {
