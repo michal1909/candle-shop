@@ -22,7 +22,7 @@ export class ProductDetailsComponent {
   ) { }
 
   addToCart() {
-    console.log(`Adding to cart: ${this.product.name}, ${this.product.price}`);
+    // console.log(`Adding to cart: ${this.product.name}, ${this.product.price}`);
     const cartItem = new CartItem(this.product);
     this.cartService.addToCart(cartItem);
   }

@@ -35,27 +35,34 @@ public class JwtUtil {
     public String generateToken(String email, String name) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("name", name);
+        claims.put("email", email);
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(email)
+                .setSubject(name)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // 1 dzień
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
 
-    public String extractUsername(String token) {
+    public String extractEmail(String token) {
         return Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .build()
-                .parseSignedClaims(token)
+                .parseClaimsJws(token)
                 .getBody()
-                .getSubject();
+                .get("email", String.class);
     }
 
     public boolean validateToken(String token, String username) {
-        return username.equals(extractUsername(token)) && !isTokenExpired(token);
+        String extractedName = extractEmail(token);
+//        System.out.println("Nazwa z tokenu: " + extractedName);
+//        System.out.println("Nazwa z bazy danych: " + username);
+        boolean isValid = username.equals(extractedName) && !isTokenExpired(token);
+        System.out.println("Czy token jest ważny: " + isValid);
+
+        return isValid;
     }
 
     private boolean isTokenExpired(String token) {

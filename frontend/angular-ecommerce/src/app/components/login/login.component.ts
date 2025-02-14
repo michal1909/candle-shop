@@ -26,9 +26,11 @@ export class LoginComponent {
     this.http.post('http://localhost:8080/api/auth/login', { email: this.email, password: this.password })
       .subscribe({
         next: (response: any) => {
+          // console.log("Odpowiedź z serwera:", response);
           this.isLoading = false;
-          this.authService.setToken(response.token);
-          console.log("Login: Zalogowano, token:", response.token);
+          this.authService.setToken(response.token, response.user);
+          // console.log("Login: Zalogowano, token:", response.token);
+          // console.log("Login: Dane użytkownika:", response.user);
           this.router.navigate(['/']);
         },
         error: (error) => {

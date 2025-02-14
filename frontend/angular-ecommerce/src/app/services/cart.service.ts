@@ -6,47 +6,43 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CartService {
-  
+
   cartItems: CartItem[] = [];
+  cartItems$: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
   totalPrice: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   totalQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor() {
-    if (this.isBrowser()) {
-      this.loadCartFromStorage(); // Wczytanie koszyka tylko w przeglądarce
-    }
-  }
-
-  // Sprawdzamy, czy kod jest wykonywany po stronie klienta
-  private isBrowser(): boolean {
-    return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
+      this.loadCartFromStorage();
   }
 
   loadCartFromStorage() {
-    if (this.isBrowser()) {
-      const data = localStorage.getItem('cartItems');
-      this.cartItems = data ? JSON.parse(data) : [];
-      this.computeCartTotals();
+    if (typeof window !== 'undefined') {
+        const data = localStorage.getItem('cartItems');
+        this.cartItems = data ? JSON.parse(data) : [];
+        this.computeCartTotals();
+        this.cartItems$.next(this.cartItems);
     }
-  }
+}
 
-  saveCartToStorage() {
-    if (this.isBrowser()) {
+saveCartToStorage() {
+  if (typeof window !== 'undefined') {
       localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
-    }
   }
+}
 
   addToCart(theCartItem: CartItem) {
-    let existingCartItem = this.cartItems.find(item => item.id === theCartItem.id);
+      let existingCartItem = this.cartItems.find(item => item.id === theCartItem.id);
 
-    if (existingCartItem) {
-      existingCartItem.quantity++;
-    } else {
-      this.cartItems.push(theCartItem);
-    }
+      if (existingCartItem) {
+          existingCartItem.quantity++;
+      } else {
+          this.cartItems.push(theCartItem);
+      }
 
-    this.computeCartTotals();
-    this.saveCartToStorage();
+      this.computeCartTotals();
+      this.saveCartToStorage();
+      this.cartItems$.next(this.cartItems);
   }
 
   remove(theCartItem: CartItem) {
@@ -74,19 +70,19 @@ export class CartService {
     let totalQuantityValue = 0;
 
     for (let item of this.cartItems) {
-      totalPriceValue += item.quantity * item.price;
-      totalQuantityValue += item.quantity;
+        totalPriceValue += item.quantity * item.price;
+        totalQuantityValue += item.quantity;
     }
 
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
-  }
+}
 
-  clearCart() {
-    this.cartItems = [];
-    this.computeCartTotals();
-    if (this.isBrowser()) {
+clearCart() {
+  this.cartItems = [];
+  this.computeCartTotals();
+  if (typeof window !== 'undefined') {
       localStorage.removeItem('cartItems');
-    }
   }
+}
 }

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.LoginResponse;
 import com.example.demo.dto.RegisterRequest;
+import com.example.demo.dto.AuthenticationResponse;
 import com.example.demo.entity.User;
 import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
@@ -42,15 +43,15 @@ public class AuthController {
         }
 
         UserDetails userDetails = userService.loadUserByUsername(user.getEmail());
-        Optional<User> fullUser = userService.getUserByEmail(user.getEmail());
+        User fullUser = userService.getUserByEmail(user.getEmail());
 
-        if (fullUser.isEmpty()) {
+        if (fullUser == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        String token = jwtUtil.generateToken(userDetails.getUsername(), fullUser.get().getName());
+        String token = jwtUtil.generateToken(fullUser.getEmail(), fullUser.getName());
 
-        return ResponseEntity.ok(new LoginResponse(userDetails.getUsername(), token));
+        return ResponseEntity.ok(new AuthenticationResponse(token, fullUser));
     }
 
     @PostMapping("/register")

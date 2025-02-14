@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private productService: ProductService,
     private router: Router,
-    private cdr: ChangeDetectorRef // Dodajemy ChangeDetectorRef
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -31,13 +31,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.checkLoginStatus(); // Sprawdzamy status logowania przy inicjalizacji
+    this.checkLoginStatus();
 
     this.isLoggedInSubscription = this.authService.isLoggedIn$.subscribe(isLoggedIn => {
-      console.log("Navbar: Otrzymałem z AuthService, czy zalogowany?", isLoggedIn);
       this.isLoggedIn = isLoggedIn;
       this.userName = this.authService.getUserName();
-      console.log("Navbar: Imię użytkownika:", this.userName);
       this.cdr.detectChanges();
     });
   }
@@ -51,9 +49,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   checkLoginStatus() {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.userName = this.authService.getUserName();
-    console.log("Navbar: Początkowy status logowania:", this.isLoggedIn); // Logujemy status logowania
-    console.log("Navbar: Początkowe imię użytkownika:", this.userName); // Logujemy imię użytkownika
-    this.cdr.detectChanges(); // Wymuszamy aktualizację widoku
+    this.cdr.detectChanges();
   }
 
   logout() {

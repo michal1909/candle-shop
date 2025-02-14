@@ -10,8 +10,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins("*") // Zezwalamy na wszystkie domeny (tylko do testów!)
-                .allowedMethods("*") // Zezwalamy na wszystkie metody (tylko do testów!)
-                .allowedHeaders("*"); // Zezwalamy na wszystkie nagłówki (tylko do testów!)
+                .allowedOrigins("http://localhost:4200")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*");
     }
 }

@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   {path: 'cart-details', component: CartDetailsComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'products', component: ProductListComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'checkout', component: CheckoutComponent},
   {path: '', redirectTo: '/products', pathMatch: 'full'},
   {path: '**', redirectTo: '/products', pathMatch: 'full'}
 ];
@@ -38,7 +40,8 @@ const routes: Routes = [
     ProductDetailsComponent,
     CartDetailsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CheckoutComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
