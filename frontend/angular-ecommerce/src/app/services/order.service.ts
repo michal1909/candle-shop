@@ -23,4 +23,21 @@ export class OrderService {
 
       return this.http.post(this.apiUrl, order, { headers });
   }
+
+  getOrderHistory(): Observable<Order[]> {
+    const token = this.authService.getToken();
+
+    if (!token) {
+        return new Observable<Order[]>(observer => {
+            observer.complete();
+          });
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${token}`
+    });
+
+    return this.http.get<Order[]>(`${this.apiUrl}/history`, { headers });
+  }
 }

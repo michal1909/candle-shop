@@ -9,11 +9,11 @@ export class CartItem {
     product: Product;
 
     constructor(product: Product) {
-        this.id = product.id;
-        this.name = product.name;
-        this.imageUrl = product.imageUrl;
-        this.price = product.price;
-        this.quantity = 1;
-        this.product = product;
-    }
+      this.id = product.id!;
+      this.name = product.name!;
+      this.imageUrl = product.imageUrl!;
+      this.price = product.price!;
+      this.quantity = 1;
+      this.product = product;
+  }
 }

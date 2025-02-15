@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.OrderRepository;
 import com.example.demo.dao.ProductRepository;
+import com.example.demo.dao.UserRepository;
 import com.example.demo.dto.OrderItemDto;
 import com.example.demo.dto.OrderRequest;
 import com.example.demo.entity.Order;
@@ -13,16 +15,18 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/orders")
 public class OrderController {
 
@@ -32,7 +36,13 @@ public class OrderController {
     private UserService userService;
 
     @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping
     public ResponseEntity<Order> createOrder(@RequestBody OrderRequest orderRequest, Principal principal) {
@@ -87,5 +97,23 @@ public class OrderController {
         Order createdOrder = orderService.createOrder(order, orderItems, user);
         return ResponseEntity.ok(createdOrder);
     }
+
+    @GetMapping("/history")
+    public ResponseEntity<List<Order>> getOrderHistory(@AuthenticationPrincipal Object principal) {
+        if (principal instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) principal;
+            Optional<User> userOptional = Optional.ofNullable(userRepository.findByEmail(userDetails.getUsername()));
+
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                List<Order> orders = orderRepository.findByUser(user);
+                return ResponseEntity.ok(orders);
+            } else {
+                return ResponseEntity.badRequest().build();
+            }
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
 
 }

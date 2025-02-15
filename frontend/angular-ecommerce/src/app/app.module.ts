@@ -21,6 +21,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { AdminGuard } from './admin.guard';
 import { AdminProductManagementComponent } from './components/admin-product-management/admin-product-management.component';
+import { HistoryComponent } from './history/history.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'checkout', component: CheckoutComponent},
+  {path: 'history', component: HistoryComponent},
   {path: '', redirectTo: '/products', pathMatch: 'full'},
   {path: '**', redirectTo: '/products', pathMatch: 'full'}
 ];
@@ -51,7 +53,8 @@ const routes: Routes = [
     CheckoutComponent,
     FooterComponent,
     AdminPanelComponent,
-    AdminProductManagementComponent
+    AdminProductManagementComponent,
+    HistoryComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

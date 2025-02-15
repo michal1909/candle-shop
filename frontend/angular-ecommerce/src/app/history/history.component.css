@@ -1,0 +1,9 @@
+.no-orders-container {
+  display: grid;
+  place-items: center;
+  height: 200px;
+}
+
+.no-orders-container p {
+  font-size: 1.2rem;
+}

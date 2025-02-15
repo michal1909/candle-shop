@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h2>Historia Zamówień</h2>
+
+  <div *ngIf="orders && orders.length > 0; else noOrders">
+    <div *ngFor="let order of orders" class="mb-4">
+      <h3>Zamówienie #{{ order.id }}</h3>
+      <p>Data zamówienia: {{ order.dateCreated | date }}</p>
+      <p>Suma: {{ order.totalPrice | currency: 'PLN' }}</p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Produkt</th>
+            <th>Nazwa</th>
+            <th>Ilość</th>
+            <th>Cena</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of order.orderItems">
+            <td>
+              <img [src]="item.product.imageUrl" class="img-thumbnail" width="50px" alt="Zdjęcie produktu">
+            </td>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price | currency: 'PLN' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+    <ng-template #noOrders>
+      <div class="no-orders-container">
+        <p>Brak zamówień.</p>
+      </div>
+    </ng-template>
+
+</div>

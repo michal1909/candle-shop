@@ -6,7 +6,7 @@ export class Order {
   orderItems?: OrderItem[];
   totalPrice?: number;
   active?: boolean;
-  createdAt?: Date;
+  dateCreated?: Date;
   lastUpdated?: Date;
 
   address: Address = new Address();
