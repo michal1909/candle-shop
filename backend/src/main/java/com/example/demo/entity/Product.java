@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode; // Dodajemy EqualsAndHashCode
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -47,6 +48,8 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<ProductCategory> productCategories = new HashSet<>();
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE) // Dodajemy CascadeType.REMOVE
+    private List<OrderItem> orderItems;
 
     public void addCategory(ProductCategory category) {
         this.productCategories.add(category);
@@ -120,5 +123,13 @@ public class Product {
 
     public void setProductCategories(Set<ProductCategory> productCategories) {
         this.productCategories = productCategories;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }

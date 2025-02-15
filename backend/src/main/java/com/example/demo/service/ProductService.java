@@ -6,6 +6,7 @@ import com.example.demo.entity.Product;
 import com.example.demo.entity.ProductCategory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,5 +42,9 @@ public class ProductService {
             return true;
         }
         return false;
+    }
+
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 }

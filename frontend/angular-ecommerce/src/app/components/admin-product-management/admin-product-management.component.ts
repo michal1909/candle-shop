@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../common/product';
+import { Category } from '../../common/category';
 
 @Component({
   selector: 'app-admin-product-management',
@@ -14,6 +15,8 @@ export class AdminProductManagementComponent {
   thePageSize: number = 12;
   theTotalElements: number = 0;
   selectedProduct: Product | null = null;
+
+  categories: Category[] = [];
 
   productForm: Product = {
     id: 0,

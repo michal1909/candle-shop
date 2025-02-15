@@ -2,9 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
@@ -18,11 +20,12 @@ public class ProductController {
         this.productService = productService;
     }
 
-//    @PostMapping
-//    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-//        Product savedProduct = productService.addProduct(product);
-//        return ResponseEntity.ok(savedProduct);
-//    }
+    @PostMapping("/add")
+    public ResponseEntity<EntityModel<Product>> addProduct(@RequestBody Product product) {
+        product.setCategory(productService.getAllProducts().get(0).getCategory());
+        Product savedProduct = productService.addProduct(product);
+        return ResponseEntity.ok(EntityModel.of(savedProduct));
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody Product product) {

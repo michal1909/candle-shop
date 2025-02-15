@@ -30,43 +30,43 @@
           <h3>Adres dostawy</h3>
           <div class="mb-3">
             <label for="city" class="form-label">Miasto</label>
-            <input type="text" class="form-control" id="city" name="city" [(ngModel)]="order.address.city" required>
+            <input type="text" class="form-control" id="city" name="city" required>
           </div>
           <div class="mb-3">
             <label for="zipCode" class="form-label">Kod pocztowy</label>
-            <input type="text" class="form-control" id="zipCode" name="zipCode" [(ngModel)]="order.address.zipCode" required>
+            <input type="text" class="form-control" id="zipCode" name="zipCode" required>
           </div>
           <div class="mb-3">
             <label for="street" class="form-label">Ulica</label>
-            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="order.address.street" required>
+            <input type="text" class="form-control" id="street" name="street" required>
           </div>
           <div class="mb-3">
             <label for="localNumber" class="form-label">Numer domu/lokalu</label>
-            <input type="text" class="form-control" id="localNumber" name="localNumber" [(ngModel)]="order.address.localNumber" required>
+            <input type="text" class="form-control" id="localNumber" name="localNumber" required>
           </div>
         </div>
         <div class="col-md-6">
           <h3>Adres do faktury (jeśli inny)</h3>
           <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="sameAsDelivery" [(ngModel)]="order.sameAsDelivery" (change)="copyAddress()">
+            <input class="form-check-input" type="checkbox" id="sameAsDelivery" (change)="copyAddress()">
             <label class="form-check-label" for="sameAsDelivery">Taki sam jak adres dostawy</label>
           </div>
           <div *ngIf="!order.sameAsDelivery">
             <div class="mb-3">
               <label for="invoiceCity" class="form-label">Miasto</label>
-              <input type="text" class="form-control" id="invoiceCity" name="invoiceCity" [(ngModel)]="order.invoiceAddress.city">
+              <input type="text" class="form-control" id="invoiceCity" name="invoiceCity">
             </div>
             <div class="mb-3">
               <label for="invoiceZipCode" class="form-label">Kod pocztowy</label>
-              <input type="text" class="form-control" id="invoiceZipCode" name="invoiceZipCode" [(ngModel)]="order.invoiceAddress.zipCode">
+              <input type="text" class="form-control" id="invoiceZipCode" name="invoiceZipCode">
             </div>
             <div class="mb-3">
               <label for="invoiceStreet" class="form-label">Ulica</label>
-              <input type="text" class="form-control" id="invoiceStreet" name="invoiceStreet" [(ngModel)]="order.invoiceAddress.street">
+              <input type="text" class="form-control" id="invoiceStreet" name="invoiceStreet">
             </div>
             <div class="mb-3">
               <label for="invoiceLocalNumber" class="form-label">Numer domu/lokalu</label>
-              <input type="text" class="form-control" id="invoiceLocalNumber" name="invoiceLocalNumber" [(ngModel)]="order.invoiceAddress.localNumber">
+              <input type="text" class="form-control" id="invoiceLocalNumber" name="invoiceLocalNumber">
             </div>
           </div>
         </div>

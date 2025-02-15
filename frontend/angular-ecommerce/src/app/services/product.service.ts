@@ -17,7 +17,7 @@ export class ProductService {
   private getAuthHeaders(): HttpHeaders {
     const token = this.authService.getToken();
 
-    console.log("🔹 Final Token in Header:", JSON.stringify(token)); // ✅ Debug log
+    console.log("🔹 Final Token in Header:", JSON.stringify(token));
 
     return new HttpHeaders({
       'Content-Type': 'application/json',
@@ -25,54 +25,46 @@ export class ProductService {
     });
   }
 
-  // ✅ Get a Single Product
   getProduct(theProductId: number): Observable<Product> {
     return this.httpClient.get<Product>(`${this.baseUrl}/${theProductId}`);
   }
 
-  // ✅ Get Paginated Product List
   getProductListPaginate(thePage: number, thePageSize: number, theCategoryId: number): Observable<GetResponseProducts> {
     return this.httpClient.get<GetResponseProducts>(
       `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}&page=${thePage}&size=${thePageSize}`
     );
   }
 
-  // ✅ Get All Products Paginated
   getAllProductListPaginate(page: number, size: number): Observable<GetResponseProducts> {
     return this.httpClient.get<GetResponseProducts>(`${this.baseUrl}?page=${page}&size=${size}`);
   }
 
-  // ✅ Get Products by Category
   getProductList(theCategoryId: number): Observable<Product[]> {
     return this.getProducts(`${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`);
   }
 
-  // ✅ Get All Categories
   getProductCategories(): Observable<Category[]> {
     return this.httpClient.get<GetResponseCategories>(this.categoryUrl).pipe(
       map(response => response._embedded.productCategory)
     );
   }
 
-  // ✅ Search Products (Paginated)
   searchProductsPaginate(thePage: number, thePageSize: number, keyword: string): Observable<GetResponseProducts> {
     return this.httpClient.get<GetResponseProducts>(
       `${this.baseUrl}/search/findByNameContaining?name=${keyword}&page=${thePage}&size=${thePageSize}`
     );
   }
 
-  // ✅ Search Products
   searchProducts(theKeyword: string): Observable<Product[]> {
     return this.getProducts(`${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`);
   }
 
-  // ✅ Helper Function to Fetch Products
   private getProducts(searchUrl: string): Observable<Product[]> {
     return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(map(response => response._embedded.products));
   }
 
   addProduct(product: Product): Observable<Product> {
-    return this.httpClient.post<Product>(this.baseUrl, product, { headers: this.getAuthHeaders() });
+    return this.httpClient.post<Product>(`${this.baseUrl}/add`, product, { headers: this.getAuthHeaders() });
   }
 
   updateProduct(product: Product): Observable<Product> {
