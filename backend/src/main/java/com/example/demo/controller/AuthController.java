@@ -49,7 +49,9 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        String token = jwtUtil.generateToken(fullUser.getEmail(), fullUser.getName());
+        String role = fullUser.getRole();
+
+        String token = jwtUtil.generateToken(fullUser.getEmail(), fullUser.getName(), role);
 
         return ResponseEntity.ok(new AuthenticationResponse(token, fullUser));
     }

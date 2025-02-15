@@ -16,12 +16,12 @@ footer h4 {
 }
 
 .footer-column {
-    flex: 1; 
+    flex: 1;
     padding: 0 15px;
 }
 
 .footer-column + .footer-column {
-    margin-left: 100px; 
+    margin-left: 100px;
 }
 
 .footer-header {

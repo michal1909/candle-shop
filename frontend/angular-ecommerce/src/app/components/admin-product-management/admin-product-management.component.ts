@@ -10,9 +10,9 @@ import { Product } from '../../common/product';
 })
 export class AdminProductManagementComponent {
   products: Product[] = [];
-  currentPage = 0;
-  pageSize = 5;
-  totalProducts = 0;
+  thePageNumber: number = 1;
+  thePageSize: number = 12;
+  theTotalElements: number = 0;
   selectedProduct: Product | null = null;
 
   productForm: Product = {
@@ -31,15 +31,19 @@ export class AdminProductManagementComponent {
   }
 
   loadProducts(): void {
-    this.productService.getAllProductListPaginate(this.currentPage, this.pageSize)
-      .subscribe(response => {
-        this.products = response._embedded.products;
-        this.totalProducts = response.page.totalElements;
-      });
+    this.productService.getAllProductListPaginate(this.thePageNumber - 1, this.thePageSize).subscribe(
+      data => {
+        this.products = data._embedded.products;
+        this.thePageNumber = data.page.number + 1;
+        this.thePageSize = data.page.size;
+        this.theTotalElements = data.page.totalElements;
+      }
+    );
   }
 
-  changePage(page: number): void {
-    this.currentPage = page - 1;
+   updatePageSize(pageSize: string) {
+    this.thePageSize = +pageSize;
+    this.thePageNumber = 1;
     this.loadProducts();
   }
 

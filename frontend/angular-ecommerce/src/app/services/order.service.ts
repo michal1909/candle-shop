@@ -18,7 +18,7 @@ export class OrderService {
       const token = this.authService.getToken();
       const headers = new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `${token}`
       });
 
       return this.http.post(this.apiUrl, order, { headers });

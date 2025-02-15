@@ -41,7 +41,7 @@ public class Product {
     @Column(name = "stock")
     private int stock;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // Zmieniamy cascade
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
@@ -56,5 +56,69 @@ public class Product {
     public void removeCategory(ProductCategory category) {
         this.productCategories.remove(category);
         category.getProducts().remove(this);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public ProductCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public Set<ProductCategory> getProductCategories() {
+        return productCategories;
+    }
+
+    public void setProductCategories(Set<ProductCategory> productCategories) {
+        this.productCategories = productCategories;
     }
 }

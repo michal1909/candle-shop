@@ -16,12 +16,12 @@ export class ProductService {
 
   private getAuthHeaders(): HttpHeaders {
     const token = this.authService.getToken();
-  
+
     console.log("🔹 Final Token in Header:", JSON.stringify(token)); // ✅ Debug log
-  
+
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': token || ''
+      'Authorization': `${token}`
     });
   }
 
@@ -74,11 +74,11 @@ export class ProductService {
   addProduct(product: Product): Observable<Product> {
     return this.httpClient.post<Product>(this.baseUrl, product, { headers: this.getAuthHeaders() });
   }
-  
+
   updateProduct(product: Product): Observable<Product> {
     return this.httpClient.put<Product>(`${this.baseUrl}/${product.id}`, product, { headers: this.getAuthHeaders() });
   }
-  
+
   deleteProduct(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.baseUrl}/${id}`, { headers: this.getAuthHeaders() });
   }

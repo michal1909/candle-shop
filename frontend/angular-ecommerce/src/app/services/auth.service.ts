@@ -17,10 +17,10 @@ export class AuthService {
 
   setToken(token: string, user: any) {
     if (isPlatformBrowser(this.platformId)) {
-      const cleanedToken = token.trim(); // ✅ Remove unwanted spaces/newlines
+      const cleanedToken = token.trim();
       localStorage.setItem('token', cleanedToken);
-      console.log("✅ Stored Token:", JSON.stringify(cleanedToken)); // Debug
-  
+      console.log("Stored Token:", JSON.stringify(cleanedToken));
+
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         this.isLoggedInSubject.next(true);
@@ -37,10 +37,10 @@ export class AuthService {
   getToken(): string | null {
     if (isPlatformBrowser(this.platformId)) {
       let token = localStorage.getItem('token');
-  
+
       if (token) {
-        token = token.replace(/\s+/g, ''); // ✅ Remove all newlines and spaces
-        console.log("✅ Cleaned Token:", JSON.stringify(token)); // Debug log
+        token = token.replace(/\s+/g, '');
+        console.log("Cleaned Token:", JSON.stringify(token))
         return `Bearer ${token}`;
       }
     }

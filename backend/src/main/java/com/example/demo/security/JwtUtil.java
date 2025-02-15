@@ -32,7 +32,7 @@ public class JwtUtil {
         return Base64.getEncoder().encodeToString(secretBytes);
     }
 
-    public String generateToken(String email, String name) {
+    public String generateToken(String email, String name, String role) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("name", name);
         claims.put("email", email);
