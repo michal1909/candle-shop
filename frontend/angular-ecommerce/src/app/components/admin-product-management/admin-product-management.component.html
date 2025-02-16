@@ -1,7 +1,6 @@
 <div class="container">
   <h2 class="mb-3">Zarządzanie produktami</h2>
 
-  <!-- Formularz dodawania / edycji -->
   <div class="card mb-4">
     <div class="card-header">
       {{ selectedProduct ? 'Edytuj produkt' : 'Dodaj nowy produkt' }}
@@ -33,8 +32,6 @@
       <button *ngIf="selectedProduct" class="btn btn-secondary mt-3" (click)="resetForm()">Anuluj</button>
     </div>
   </div>
-
-  <!-- Lista produktów -->
   <table class="table table-striped">
     <thead>
       <tr>
@@ -53,7 +50,7 @@
         <td>{{ product.stock }}</td>
         <td>
           <button class="btn btn-warning btn-sm" (click)="editProduct(product)">Edytuj</button>
-          <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Usuń</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id!)">Usuń</button>
         </td>
       </tr>
     </tbody>
