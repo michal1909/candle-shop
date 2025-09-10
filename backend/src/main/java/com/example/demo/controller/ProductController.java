@@ -20,6 +20,13 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        Optional<Product> product = productService.getProductById(id);
+        return product.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping("/add")
     public ResponseEntity<EntityModel<Product>> addProduct(@RequestBody Product product) {
         product.setCategory(productService.getAllProducts().get(0).getCategory());

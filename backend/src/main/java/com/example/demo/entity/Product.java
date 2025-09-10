@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -15,7 +16,6 @@ import java.util.Set;
 @Table(name = "product")
 @Data
 @EqualsAndHashCode(exclude = "productCategories")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Product {
 
     @Id
@@ -37,6 +37,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
+    @JsonIgnore
     private ProductCategory category;
 
     @Column(name = "stock")
@@ -46,9 +47,11 @@ public class Product {
     @JoinTable(name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JsonIgnore
     private Set<ProductCategory> productCategories = new HashSet<>();
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE) // Dodajemy CascadeType.REMOVE
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private List<OrderItem> orderItems;
 
     public void addCategory(ProductCategory category) {

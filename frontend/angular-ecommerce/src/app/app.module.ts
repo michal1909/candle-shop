@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { ProductService } from './services/product.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -59,12 +59,11 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    HttpClientModule,
     CommonModule,
     FormsModule,
     NgbModule
   ],
-  providers: [ProductService, AuthService],
+  providers: [ProductService, AuthService, provideHttpClient(withFetch())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
